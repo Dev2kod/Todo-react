@@ -14,33 +14,33 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation: backgroundFade 10s infinite alternate;
+    animation: backgroundFade 10s infinite alternate ease-in-out;
 }
 
 /* Header Styling with Animation */
 .header {
     background-color: #4CAF50;
     width: 100%;
-    padding: 20px 0;
+    padding: 1.25rem 0;
     text-align: center;
     color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    animation: slideDown 1s ease-out;
+    animation: slideDown 0.7s ease-out;
 }
 
 .header h1 {
     font-size: 2.5rem;
-    animation: fadeIn 2s ease-in-out;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 /* Container Styling */
 .container {
     width: 90%;
-    max-width: 800px;
-    margin-top: 30px;
+    max-width: 50rem;
+    margin-top: 2rem;
     background: white;
-    padding: 25px;
-    border-radius: 12px;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     animation: popIn 0.5s ease-out;
 }
@@ -49,39 +49,39 @@ body {
 .input-section {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: 25px;
-    animation: fadeInUp 1s ease-out;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.7s ease-out;
 }
 
 .input-section input {
-    padding: 12px 15px;
-    font-size: 16px;
+    padding: 0.75rem;
+    font-size: 1rem;
     border: 2px solid #ddd;
-    border-radius: 8px;
-    transition: border-color 0.3s, transform 0.3s;
+    border-radius: 0.5rem;
+    transition: border-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .input-section input:focus {
     border-color: #4CAF50;
     outline: none;
-    transform: scale(1.02);
+    transform: scale(1.03);
 }
 
 /* Buttons Styling with Hover Animations */
 .buttons {
     display: flex;
-    gap: 15px;
+    gap: 1rem;
 }
 
 .buttons button {
     flex: 1;
-    padding: 12px;
-    font-size: 16px;
+    padding: 0.75rem;
+    font-size: 1rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
@@ -107,28 +107,27 @@ body {
     box-shadow: 0 6px 8px rgba(0,0,0,0.15);
 }
 
-/* Lists Section Styling with Animation */
+/* Lists Section Styling */
 .lists-section {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    animation: fadeInUp 1s ease-out;
+    gap: 1.5rem;
+    animation: fadeInUp 0.7s ease-out;
 }
 
 .list-container {
     background: #fafafa;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    position: relative;
     overflow: hidden;
-    animation: fadeIn 1.5s ease-in;
+    animation: fadeIn 1.2s ease-in;
 }
 
 .list-container h2 {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     color: #555;
-    animation: slideInLeft 1s ease-out;
+    animation: slideInLeft 0.7s ease-out;
 }
 
 ul {
@@ -139,10 +138,10 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 15px;
+    padding: 0.75rem;
     border-bottom: 1px solid #eee;
     background: #fff;
-    transition: background 0.3s, transform 0.3s;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
     animation: fadeInUp 0.5s ease-out;
 }
 
@@ -159,42 +158,42 @@ li.completed {
     text-decoration: line-through;
     color: #888;
     background: #e0ffe0;
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 /* Todo Text Styling */
 li .todo-text {
     flex: 1;
-    margin-left: 15px;
-    animation: fadeIn 1s ease-in;
+    margin-left: 1rem;
+    animation: fadeIn 0.8s ease-in;
 }
 
 /* Actions Buttons Styling with Animation */
 li .actions button {
-    margin-left: 10px;
+    margin-left: 0.75rem;
     background: none;
     border: none;
     cursor: pointer;
     color: #4CAF50;
-    font-size: 18px;
-    transition: color 0.3s, transform 0.2s;
-    animation: fadeIn 1s ease-in;
+    font-size: 1.25rem;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    animation: fadeIn 0.8s ease-in;
 }
 
 li .actions button:hover {
     color: #388E3C;
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
 
 /* Responsive Design */
-@media (min-width: 600px) {
+@media (min-width: 37.5rem) {
     .lists-section {
         flex-direction: row;
-        gap: 30px;
+        gap: 2rem;
     }
 
     .list-container {
-        width: 50%;
+        width: 100%;
     }
 }
 
@@ -232,6 +231,6 @@ li .actions button:hover {
 
 /* Pop In Animation for Container */
 @keyframes popIn {
-    0% { transform: scale(0.8); opacity: 0; }
+    0% { transform: scale(0.85); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
