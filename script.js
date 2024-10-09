@@ -1,79 +1,103 @@
-let todoList = [];
-let completedList = [];
+let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-// render todo list
-function renderTodoList() {
-    const todoListElement = document.getElementById('todo-list');
-    todoListElement.innerHTML = '';
-    todoList.forEach((todo, index) => {
-        const todoItem = document.createElement('li');
-        todoItem.textContent = todo.text;
-        todoItem.dataset.index = index;
-        if (todo.completed) {
-            todoItem.classList.add('done');
+function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function renderTodos() {
+    const todoList = document.getElementById('todo-list');
+    todoList.innerHTML = '';
+    
+    const filteredTodos = filterTodos();
+    const sortedTodos = sortTodos(filteredTodos);
+
+    sortedTodos.forEach((todo, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <input type="checkbox" ${todo.completed ? 'checked' : ''}>
+            <span class="${todo.completed ? 'completed' : ''}">${todo.text}</span>
+            <span class="due-date">${todo.dueDate}</span>
+            <span class="priority ${todo.priority}">${todo.priority}</span>
+            <button class="delete-btn"><i class="fas fa-trash"></i></button>
+        `;
+        li.querySelector('input').addEventListener('change', () => toggleTodo(index));
+        li.querySelector('.delete-btn').addEventListener('click', () => deleteTodo(index));
+        todoList.appendChild(li);
+    });
+
+    updateTodoCount();
+}
+
+function addTodo(text, dueDate, priority) {
+    todos.push({ text, completed: false, dueDate, priority, dateAdded: new Date() });
+    saveTodos();
+    renderTodos();
+}
+
+function toggleTodo(index) {
+    todos[index].completed = !todos[index].completed;
+    saveTodos();
+    renderTodos();
+}
+
+function deleteTodo(index) {
+    todos.splice(index, 1);
+    saveTodos();
+    renderTodos();
+}
+
+function filterTodos() {
+    const activeFilter = document.querySelector('.filters button.active').id;
+    return todos.filter(todo => {
+        if (activeFilter === 'filter-active') return !todo.completed;
+        if (activeFilter === 'filter-completed') return todo.completed;
+        return true;
+    });
+}
+
+function sortTodos(todosToSort) {
+    const sortBy = document.getElementById('sort-by').value;
+    return todosToSort.sort((a, b) => {
+        if (sortBy === 'due-date') return new Date(a.dueDate) - new Date(b.dueDate);
+        if (sortBy === 'priority') {
+            const priorityOrder = { low: 0, medium: 1, high: 2 };
+            return priorityOrder[b.priority] - priorityOrder[a.priority];
         }
-        const completeButton = document.createElement('button');
-        completeButton.textContent = 'Complete';
-        completeButton.addEventListener('click', () => {
-            completeTodoItem(index);
-        });
-        todoItem.appendChild(completeButton);
-        todoListElement.appendChild(todoItem);
+        return new Date(a.dateAdded) - new Date(b.dateAdded);
     });
 }
 
-// render completed list
-function renderCompletedList() {
-    const completedListElement = document.getElementById('completed-list');
-    completedListElement.innerHTML = '';
-    completedList.forEach((todo, index) => {
-        const todoItem = document.createElement('li');
-        todoItem.textContent = todo.text;
-        todoItem.dataset.index = index;
-        todoItem.classList.add('done');
-        completedListElement.appendChild(todoItem);
-    });
+function updateTodoCount() {
+    const count = todos.filter(todo => !todo.completed).length;
+    document.getElementById('todo-count').textContent = `${count} item${count !== 1 ? 's' : ''} left`;
 }
 
-// add todo item
-function addTodoItem(text) {
-    const todo = {
-        text,
-        completed: false
-    };
-    todoList.push(todo);
-    renderTodoList();
-}
-
-// complete todo item
-function completeTodoItem(index) {
-    const todo = todoList.splice(index, 1)[0];
-    todo.completed = true;
-    completedList.push(todo);
-    renderTodoList();
-    renderCompletedList();
-}
-
-// clear task list
-function clearTaskList() {
-    completedList = [];
-    renderCompletedList();
-}
-
-// event listeners
-document.getElementById('add-todo-btn').addEventListener('click', (e) => {
-    e.preventDefault();
+document.getElementById('add-todo-btn').addEventListener('click', () => {
     const text = document.getElementById('new-todo').value.trim();
+    const dueDate = document.getElementById('due-date').value;
+    const priority = document.getElementById('priority').value;
     if (text) {
-        addTodoItem(text);
+        addTodo(text, dueDate, priority);
         document.getElementById('new-todo').value = '';
+        document.getElementById('due-date').value = '';
+        document.getElementById('priority').value = 'low';
     }
 });
 
-document.getElementById('clear-task-list-btn').addEventListener('click', () => {
-    clearTaskList();
+document.getElementById('clear-completed-btn').addEventListener('click', () => {
+    todos = todos.filter(todo => !todo.completed);
+    saveTodos();
+    renderTodos();
 });
 
-// initial render
-renderTodoList();
-renderCompletedList();
+document.querySelectorAll('.filters button').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelector('.filters button.active').classList.remove('active');
+        button.classList.add('active');
+        renderTodos();
+    });
+});
+
+document.getElementById('sort-by').addEventListener('change', renderTodos);
+
+renderTodos();
