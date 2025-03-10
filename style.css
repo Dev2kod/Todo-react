@@ -1,0 +1,31 @@
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#0a0a1f;color:#ffffff;font-size:18px;line-height:1.6;}
+.app-container{max-width:800px;margin:0 auto;padding:30px 20px;}
+header{text-align:center;margin-bottom:40px;}
+h1{font-size:3em;color:#00ffff;text-shadow:0 0 10px rgba(0,255,255,0.5);font-weight:bold;}
+.input-section{display:flex;gap:15px;margin-bottom:30px;}
+input,select,button{padding:12px 15px;border:none;border-radius:8px;background-color:#1e1e3f;color:#ffffff;font-size:1em;font-weight:bold;}
+button{cursor:pointer;transition:all 0.3s ease;}
+button:hover{background-color:#3a3a7a;transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.2);}
+#new-todo{flex-grow:1;}
+.filters{display:flex;justify-content:space-between;margin-bottom:30px;}
+.filters button{background-color:#1e1e3f;color:#ffffff;font-weight:bold;}
+.filters button.active{background-color:#ff6b6b;color:#0a0a1f;}
+#todo-list{list-style-type:none;}
+#todo-list li{display:flex;align-items:center;padding:15px;margin-bottom:15px;background-color:#1e1e3f;border-radius:8px;transition:all 0.3s ease;}
+#todo-list li:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.2);}
+#todo-list li span{margin-right:15px;font-weight:bold;}
+#todo-list li span.completed{text-decoration:line-through;opacity:0.6;}
+.due-date,.priority{font-size:0.9em;padding:5px 10px;border-radius:5px;font-weight:bold;}
+.priority.low{background-color:#4ecdc4;color:#0a0a1f;}
+.priority.medium{background-color:#ffd93d;color:#0a0a1f;}
+.priority.high{background-color:#ff6b6b;color:#0a0a1f;}
+.delete-btn{margin-left:auto;background-color:transparent;color:#ff6b6b;font-size:1.2em;}
+.delete-btn:hover{background-color:rgba(255,107,107,0.2);color:#ff8e8e;}
+footer{display:flex;justify-content:space-between;margin-top:30px;color:#00ffff;font-weight:bold;}
+#add-todo-btn,#clear-completed-btn{background-color:#ff6b6b;color:#0a0a1f;font-weight:bold;padding:12px 20px;}
+#add-todo-btn:hover,#clear-completed-btn:hover{background-color:#ff8e8e;}
+@media (max-width:600px){
+    .input-section,.filters{flex-direction:column;}
+    .input-section>*,.filters>*{width:100%;margin-bottom:15px;}
+}

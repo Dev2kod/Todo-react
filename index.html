@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,3 +17,52 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Todo App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Advanced Todo App</h1>
+        </header>
+        <main>
+            <section class="input-section">
+                <input type="text" id="new-todo" placeholder="Enter new todo item">
+                <input type="date" id="due-date">
+                <select id="priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <button id="add-todo-btn"><i class="fas fa-plus"></i> Add</button>
+            </section>
+            <section class="filters">
+                <button id="filter-all" class="active">All</button>
+                <button id="filter-active">Active</button>
+                <button id="filter-completed">Completed</button>
+                <select id="sort-by">
+                    <option value="date-added">Date Added</option>
+                    <option value="due-date">Due Date</option>
+                    <option value="priority">Priority</option>
+                </select>
+            </section>
+            <section class="todo-list">
+                <ul id="todo-list"></ul>
+            </section>
+        </main>
+        <footer>
+            <button id="clear-completed-btn">Clear Completed</button>
+            <p id="todo-count">0 items left</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+>>>>>>> af6c70ad014d2d50295fc4a4f876f6791b76e270
